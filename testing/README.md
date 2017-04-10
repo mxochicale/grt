@@ -130,3 +130,48 @@ Description:	Ubuntu 14.04.3 LTS
 Release:	14.04
 Codename:	trusty
 ```
+
+
+
+
+# Some Compilation Errors
+
+
+```
+~/examples/UtilExamples/ThreadPoolExample$ ./main
+Error, this example can only be run if the
+GRT is built with C++11 support!
+```
+
+
+```
+
+~/examples/tests/DataStructures/*.cpp$ make
+
+
+~/examples/tests/Util$ make
+g++ -std=c++11 -c TypedefsTest.cpp -I /usr/local/include/GRT
+g++ *.o -o main -I /usr/local/include/GRT -L /usr/local/lib -lgrt
+TypedefsTest.o: In function `Typedefs_Sqr_Test::TestBody()':
+TypedefsTest.cpp:(.text+0x120): undefined reference to `testing::internal::AssertHelper::AssertHelper(testing::TestPartResult::Type, char const*, int, char const*)'
+TypedefsTest.cpp:(.text+0x136): undefined reference to `testing::internal::AssertHelper::operator=(testing::Message const&) const'
+TypedefsTest.cpp:(.text+0x145): undefined reference to `testing::internal::AssertHelper::~AssertHelper()'
+.
+.
+.
+TypedefsTest.o:(.rodata._ZTI18Typedefs_Sqrt_Test[_ZTI18Typedefs_Sqrt_Test]+0x10): undefined reference to `typeinfo for testing::Test'
+TypedefsTest.o:(.rodata._ZTI17Typedefs_Sqr_Test[_ZTI17Typedefs_Sqr_Test]+0x10): undefined reference to `typeinfo for testing::Test'
+collect2: error: ld returned 1 exit status
+make: *** [all] Error 1
+```
+
+```
+map479-admin@eee320:~/github/gesture_recognition_toolkit/examples/Tutorials/CustomMakefile$ make
+----------------- Building GRT Example -----------------
+g++ -c main.cpp -I/usr/local/include -g -O2 -Wall -L/usr/local/lib
+In file included from /usr/local/include/GRT/GRT.h:84:0,
+                 from main.cpp:33:
+/usr/local/include/GRT/CoreAlgorithms/GridSearch/GridSearch.h:79:35: error: expected ‘)’ before ‘<’ token
+     GridSearchParam( std::function< bool(T) > func = nullptr, GridSearchRange<T> range = GridSearchRange<T>() ){
+                                   ^
+```
